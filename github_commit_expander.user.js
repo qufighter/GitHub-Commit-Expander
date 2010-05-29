@@ -126,7 +126,6 @@ function handleInsert(nd, ta){
 		
 		if( nv == '...' ){
 			expand=true;
-			//tb.removeChild(ro[r]);
 			ro[r].className='collapsedonly';
 			ro[r].style.display='none';
 		}else if( lin > 0 )
