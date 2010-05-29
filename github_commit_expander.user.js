@@ -6,7 +6,8 @@
 // @match          http://github.com/*/*/commit*
 // ==/UserScript==
 
-var version = 1.0
+var version = 1.0;
+var showtics = true;
 var nd = document.createElement('div');
 nd.setAttribute('id','full-script-0');
 nd.setAttribute('style','display:none;');
@@ -148,8 +149,8 @@ function handleInsert(nd, ta){
 function getOffset( el ){
     var _x=0,_y=0;
     while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-    		_x+=el.offsetLeft;// - el.scrollLeft;
-    		_y+=el.offsetTop;// - el.scrollTop;  
+    		_x+=el.offsetLeft;
+    		_y+=el.offsetTop;
         el=el.offsetParent;
     }return { y: _y, x: _x };
 }
@@ -173,6 +174,7 @@ function addTics(elms,clr,bodyhei,winhei, css){
 }
 
 function updateTics(){
+	if(!showtics) return;
 	var bodyhei=getElementHeight(document.body);
 	var winhei=getWindowHeight();
 	for(var i=0,l=alltics.length; i<l; i++){
@@ -187,7 +189,6 @@ function findTics(){
 	GM_addStyle('body{height:auto !important;}')
 	var bodyhei=getElementHeight(document.body);
 	var winhei=getWindowHeight();
-	//ti.innerHTML='';
 	var ins = fi.getElementsByClassName('gi');
 	var del = fi.getElementsByClassName('gd');
 	var fil = fi.getElementsByClassName('file');
@@ -197,9 +198,11 @@ function findTics(){
 }
 
 window.scrollTo(0,330);
-window.addEventListener('resize',updateTics,false)
-window.addEventListener('load',findTics,false) 
-//if you don't like the tics at load time, this function can be called in place of updatetics in the handleInsert function ~145 however you also should uncomment the line in findTics
+
+if(showtics){
+	window.addEventListener('resize',updateTics,false)
+	findTics();
+}
 
 function getWindowHeight(){
     if(document.all){
@@ -211,8 +214,8 @@ function getWindowHeight(){
 function getElementHeight(elem){
    return elem.clientHeight
 }
-function _vt(id){// i like this saves so much time
-	if(document.getElementById(id))//i hope thats not an expensive test
+function _vt(id){
+	if(document.getElementById(id))
 		return document.getElementById(id);
 	else
 		return false;
