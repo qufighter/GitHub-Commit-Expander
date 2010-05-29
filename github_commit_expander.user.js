@@ -3,7 +3,9 @@
 // @namespace      vidzbigger.com
 // @description    Show the remaining lines of a file while viewing a commit.  Also provides scroll marks to easily jump through changes.
 // @include        http://github.com/*/*/commit*
+// @include        https://github.com/*/*/commit*
 // @match          http://github.com/*/*/commit*
+// @match          https://github.com/*/*/commit*
 // ==/UserScript==
 
 var version = 1.0;
