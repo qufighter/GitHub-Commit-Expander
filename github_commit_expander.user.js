@@ -59,7 +59,8 @@ function loadScript(evt){
 	xm.open('GET',targ.href,true);
 	xm.onreadystatechange=function(){ 
 		if (xm.readyState==4){
-			nd.innerHTML=xm.responseText;
+			var str = xm.responseText.split('<div id="files">')[1].split('<div class="push">')[0];
+			nd.innerHTML=str.substr(0,str.lastIndexOf('</div>'));
 			handleInsert(nd, urlprops[targ.href].mytable);
 			nd.innerHTML = '';
 			targ.innerHTML = urlprops[targ.href].text.replace('Show','Hide');
